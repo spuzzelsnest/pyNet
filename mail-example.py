@@ -10,11 +10,11 @@ server.ehlo()
 with open('secret.txt', 'r') as f:
     passw = f.read() 
 
-server.login('j.mpdesmet@gmail.com', passw)
+server.login('zz@xx', passw)
 
 msg = MIMEMultipart()
 msg['From'] = 'No-Reply'
-msg['To'] = 'helpdesk@yy'
+msg['To'] = 'ab@yy'
 msg['Subject'] = 'pyNet - Update'
 
 
@@ -34,4 +34,4 @@ p.add_header('Content-Disiposition',f'attachment; filename={file}')
 msg.attach(p)
 
 text = msg.as_string()
-server.sendmail('noreply@xx', 'helpdesk@yy', text)
+server.sendmail('noreply@xx', 'ab@yy', text)

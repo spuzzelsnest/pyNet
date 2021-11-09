@@ -8,6 +8,8 @@ __pycache__/
 
 .gitignore
 secret.txt
+file.png
+mail.py
 
 
 # Distribution / packaging
