@@ -7,6 +7,7 @@ from email.mime.multipart import MIMEMultipart
 server = smtplib.SMTP('smtp.xxxx', 587)
 
 server.ehlo()
+server.starttls()
 with open('secret.txt', 'r') as f:
     passw = f.read() 
 
@@ -35,3 +36,4 @@ msg.attach(p)
 
 text = msg.as_string()
 server.sendmail('noreply@xx', 'ab@yy', text)
+server.quit()
