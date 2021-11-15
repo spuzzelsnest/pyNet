@@ -1,6 +1,5 @@
 import getpass, requests, enquiries, socket, struct, fcntl, ipaddress
 from netifaces import interfaces, ifaddresses, AF_INET
-from jnpr.junos import Device
 
 
 #user = input("username: ")
@@ -39,13 +38,4 @@ print(choice)
 print(f'{ifaddresses(choice)}')
 
 
-#for switch in devices:
-
-#   connection = Device(host=switch, user=user, password=psswd)
-
-#    connection.open()
-#    showVer =  connection.rpc.get_software_information({'format': 'json'})
-#    connection.close()
-
-#    print(showVer)
 

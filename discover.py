@@ -2,8 +2,8 @@
 
 import shlex
 import subprocess
-import os
 import sys
+import os
 
 
 def sendIcmpEcho(target, out_xml):
@@ -12,6 +12,7 @@ def sendIcmpEcho(target, out_xml):
     sub_args = shlex.split(nmap_cmd)
     subprocess.Popen(sub_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
     makeInvokerOwner(out_xml)
+    print('icmp done')
 
 
 def sendIcmpNetmask(target, out_xml):
@@ -20,6 +21,7 @@ def sendIcmpNetmask(target, out_xml):
     sub_args = shlex.split(nmap_cmd)
     subprocess.Popen(sub_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
     makeInvokerOwner(out_xml)
+    print('netmask done')
 
 
 def sendIcmpTimestamp(target, out_xml):
@@ -28,11 +30,21 @@ def sendIcmpTimestamp(target, out_xml):
     sub_args = shlex.split(nmap_cmd)
     subprocess.Popen(sub_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
     makeInvokerOwner(out_xml)
+    print('host discovery done')
 
 
 def sendTcpSyn(target, out_xml):
     out_xml = os.path.join(out_xml,'logs/tcp_syn_host_discovery.xml')
     nmap_cmd = f"/usr/bin/nmap {target} -PS21,22,23,25,80,113,443 -PA80,113,443 -n -sn -T4 -vv -oX {out_xml}"
+    sub_args = shlex.split(nmap_cmd)
+    subprocess.Popen(sub_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+    makeInvokerOwner(out_xml)
+    print('tcp done')
+
+
+def tcpSynPortScan(target, out_xml,):
+    out_xml = os.path.join(out_xml,'top_1000_portscan.xml')
+    nmap_cmd = f"/usr/bin/nmap {target} --top-ports 1000 -n -Pn -sS -T4 --min-parallelism 100 --min-rate 64 -vv -oX {out_xml}"
     sub_args = shlex.split(nmap_cmd)
     subprocess.Popen(sub_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
     makeInvokerOwner(out_xml)
@@ -63,6 +75,9 @@ def main():
     sendIcmpNetmask(target, os.getcwd())
     sendIcmpTimestamp(target, os.getcwd())
     sendTcpSyn(target, os.getcwd())
+
+    print("=" * 60)
+
 
 if __name__ == '__main__':
     main()
