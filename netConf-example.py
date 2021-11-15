@@ -1,4 +1,4 @@
-import getpass, requests, enquiries, ipaddress
+import getpass, requests, enquiries, socket, struct, fcntl, ipaddress
 from netifaces import interfaces, ifaddresses, AF_INET
 from jnpr.junos import Device
 
@@ -10,8 +10,11 @@ ifList = []
 devices = []
 options = []
 
+host_name = socket.gethostname()
+
+
 extIP = requests.get('http://ifconfig.io/ip').text
-print(f'\nexternal IP: ' + extIP)
+print(f'\n{host_name} is on external IP: ' + extIP)
 
 print("\nFound the following interface(s)\n")
 
@@ -31,7 +34,7 @@ for idx, val in enumerate(ifList):
 
 choice = enquiries.choose('Select an interface', options)
 
-print(choice)    
+print(choice)
 
 print(f'{ifaddresses(choice)}')
 
