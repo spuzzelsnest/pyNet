@@ -57,7 +57,7 @@ def main():
         print('[!] The discovery probes in this script requires root privileges')
         sys.exit(1)
     
-    target = '127.0.0.1'
+    target = input("what target are you trying to discover? ")
 
     sendIcmpEcho(target, os.getcwd())
     sendIcmpNetmask(target, os.getcwd())
